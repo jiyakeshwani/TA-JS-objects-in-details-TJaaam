@@ -5,10 +5,13 @@
 /*** CHALLENGE 1 of 1 ***/
 
 function makePerson(name, age) {
-  // add code here
+  let person = {};
+  person.name = name;
+  person.age = age;
+  return person;
 }
 
-var vicky = makePerson('Vicky', 24);
+var vicky = makePerson("Vicky", 24);
 
 // /********* Uncomment these lines to test your work! *********/
 // console.log(vicky.name); // -> Logs 'Vicky'
@@ -22,6 +25,12 @@ var vicky = makePerson('Vicky', 24);
 
 var personStore = {
   // add code here
+  greet: function () {
+    console.log("Hello");
+  },
+  introduce: function () {
+    console.log(`Hi, my name is ${person.name}`);
+  },
 };
 
 // /********* Uncomment this line to test your work! *********/
@@ -31,9 +40,13 @@ var personStore = {
 
 function personFromPersonStore(name, age) {
   // add code here
+  let person = Object.create(personStore);
+  person.name = name;
+  person.age = age;
+  return person;
 }
 
-var sandra = personFromPersonStore('Sandra', 26);
+var sandra = personFromPersonStore("Sandra", 26);
 
 // /********* Uncomment these lines to test your work! *********/
 // console.log(sandra.name); // -> Logs 'Sandra'
@@ -54,6 +67,7 @@ var sandra = personFromPersonStore('Sandra', 26);
 
 function PersonConstructor() {
   // add code here
+  this.greet = personStore.greet;
 }
 
 // /********* Uncomment this line to test your work! *********/
@@ -62,11 +76,13 @@ var simon = new PersonConstructor();
 
 /*** CHALLENGE 2 of 3 ***/
 
-function personFromConstructor(name, age) {
+function PersonFromConstructor(name, age) {
   // add code here
+  this.name = name;
+  this.age = age;
 }
 
-var mike = personFromConstructor('Mike', 30);
+var mike = new PersonFromConstructor("Mike", 30);
 
 // /********* Uncomment these lines to test your work! *********/
 // console.log(mike.name); // -> Logs 'Mike'
@@ -85,11 +101,15 @@ var mike = personFromConstructor('Mike', 30);
 /*** CHALLENGE 1 of 3 ***/
 
 class PersonClass {
-  constructor() {
+  constructor(name) {
     // add code here
+    this.name = name;
   }
 
   // add code here
+  greet() {
+    console.log("hello");
+  }
 }
 
 // /********* Uncomment this line to test your work! *********/
@@ -99,6 +119,14 @@ var george = new PersonClass();
 /*** CHALLENGE 2 of 3 ***/
 
 // add code here
+class DeveloperClass extends PersonClass {
+  constructor(name) {
+    super(name);
+  }
+  introduce() {
+    console.log(`Hi, my name is ${this.name}`);
+  }
+}
 
 // /********* Uncomment these lines to test your work! *********/
 // var thai = new DeveloperClass('Thai', 32);
@@ -111,27 +139,33 @@ var george = new PersonClass();
 
 var userFunctionStore = {
   sayType: function () {
-    console.log('I am a ' + this.type);
+    console.log("I am a " + this.type);
   },
 };
 
 function userFactory(name, score) {
   let user = Object.create(userFunctionStore);
-  user.type = 'User';
+  user.type = "User";
   user.name = name;
   user.score = score;
   return user;
 }
 
-var adminFunctionStore /* Put code here */;
+var adminFunctionStore = Object.setPrototypeOf(
+  adminFunctionStore,
+  userFunctionStore
+);
 
 function adminFactory(name, score) {
   // Put code here
+  let admin = userFactory(name, score);
+  admin.type = "admin";
+  adminFactory.prototype = adminFunctionStore;
 }
 
 /* Put code here for a method called sharePublicMessage*/
 
-var adminFromFactory = adminFactory('Eva', 5);
+var adminFromFactory = adminFactory("Eva", 5);
 
 // /********* Uncomment these lines to test your work! *********/
 // adminFromFactory.sayType() // -> Logs "I am a Admin"
