@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book store using oop</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/aa8a0edd92.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="container flex">
+      <i class="fas fa-book-open"></i>
+      <h1>MyBookList</h1>
+    </header>
+    <main class="container">
+      <form action="">
+        <fieldset>
+          <label for="input"
+            >Title
+            <input type="text" name="title" class="input" />
+          </label>
+          <label for="input"
+            >Author
+            <input type="text" name="author" class="input" />
+          </label>
+          <label for="input"
+            >#ISBN
+            <input type="text" name="isbn" class="input" />
+          </label>
+          <button>Add Book</button>
+        </fieldset>
+      </form>
+      <section>
+        <div class="container">
+          <ul class="books"></ul>
+        </div>
+      </section>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>
